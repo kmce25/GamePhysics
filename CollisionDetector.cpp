@@ -5,6 +5,7 @@
 #include "AABB.h"
 #include<vector>
 #include <iostream>
+#include "BoundingSpherePocket.h"
 
 using namespace std;
 using namespace glm;
@@ -29,6 +30,13 @@ CollisionData* CollisionDetector::CheckCollision(PhysicsEntity* obj1, PhysicsEnt
 	if (dynamic_cast<AABB*>(obj1->getCollider()) != nullptr && dynamic_cast<AABB*>(obj2->getCollider()) != nullptr)
 	{
 		CollisionDetector::AABBAABBCollision(obj1, obj2, &data);
+		return data;
+	}
+
+	if ((dynamic_cast<BoundingSphere*>(obj1->getCollider()) != nullptr && dynamic_cast<BoundingSpherePocket*>(obj2->getCollider()) != nullptr) ||
+		(dynamic_cast<BoundingSpherePocket*>(obj1->getCollider()) != nullptr && dynamic_cast<BoundingSphere*>(obj2->getCollider()) != nullptr))
+	{
+		CollisionDetector::SpherePocketCollision(obj1, obj2, &data);
 		return data;
 	}
 
@@ -156,4 +164,22 @@ bool CollisionDetector::AABBAABBCollision(PhysicsEntity * obj1, PhysicsEntity * 
 	}
 
 	return collision;
+}
+
+bool CollisionDetector::SpherePocketCollision(PhysicsEntity * obj1, PhysicsEntity * obj2, CollisionData** data) 
+{
+	BoundingSphere* s1 = dynamic_cast<BoundingSphere*>(obj1->getCollider());
+	BoundingSpherePocket* s2 = dynamic_cast<BoundingSpherePocket*>(obj2->getCollider());
+	if (s2 != nullptr)
+	{
+	float dist = Utils::distanceBetweenPoints(s1->getCenter(), s2->getCenter());
+	float penetration = dist - (s1->getRadii() + s2->getRadii());
+	bool collision = penetration <= 0;
+	if (collision)
+	{
+		delete obj1;
+	}
+
+	return collision;
+	}
 }

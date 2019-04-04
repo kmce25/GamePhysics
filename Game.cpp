@@ -7,6 +7,8 @@
 #include "Balls.h"
 #include "Shadow.h"
 #include "list"
+#include "BallInner.h"
+#include "Drag.h"
 
 using namespace std;
 using namespace glm;	
@@ -104,50 +106,187 @@ void Game::Load()
 	///////////////////////////////////////////////////////////////////////////////////////////////Inner pocket
 
 	PhysicsParameters* ParametersPocketsBotLeft = new PhysicsParameters(INFINITY, vec2(150, 50), vec2(0, 0), .0f);			//Bottom Left pocket collision
-	Balls* BotLeftPockColl = new Balls(15, ParametersPocketsBotLeft, vec3(1));
+	BallInner* BotLeftPockColl = new BallInner(15, ParametersPocketsBotLeft, vec3(1));
 	dynObjs.push_back(BotLeftPockColl);
 
 	PhysicsParameters* ParametersPocketsMidLeft = new PhysicsParameters(INFINITY, vec2(150, 500), vec2(0, 0), .0f);			//Mid Left pocket collision
-	Balls* MidLeftPockColl = new Balls(15, ParametersPocketsMidLeft, vec3(1));
+	BallInner* MidLeftPockColl = new BallInner(15, ParametersPocketsMidLeft, vec3(1));
 	dynObjs.push_back(MidLeftPockColl);
 
 	PhysicsParameters* ParametersPocketsTopLeft = new PhysicsParameters(INFINITY, vec2(150, 950), vec2(0, 0), .0f);			//Top Left pocket collision
-	Balls* TopLeftPockColl = new Balls(15, ParametersPocketsTopLeft, vec3(1));
+	BallInner* TopLeftPockColl = new BallInner(15, ParametersPocketsTopLeft, vec3(1));
 	dynObjs.push_back(TopLeftPockColl);
 
 	PhysicsParameters* ParametersPocketsTopRight = new PhysicsParameters(INFINITY, vec2(850, 950), vec2(0, 0), .0f);		//Top Right pocket collision
-	Balls* TopRightPockColl = new Balls(15, ParametersPocketsTopRight, vec3(1));
+	BallInner* TopRightPockColl = new BallInner(15, ParametersPocketsTopRight, vec3(1));
 	dynObjs.push_back(TopRightPockColl);
 
 	PhysicsParameters* ParametersPocketsMidRight = new PhysicsParameters(INFINITY, vec2(850, 500), vec2(0, 0), .0f);		//Mid Right pocket collision
-	Balls* MidRightPockColl = new Balls(15, ParametersPocketsMidRight, vec3(1));
+	BallInner* MidRightPockColl = new BallInner(15, ParametersPocketsMidRight, vec3(1));
 	dynObjs.push_back(MidRightPockColl);
 
 	PhysicsParameters* ParametersPocketsBotRight = new PhysicsParameters(INFINITY, vec2(850, 50), vec2(0, 0), .0f);			//Bottom Right pocket collision
-	Balls* BotRightPockColl = new Balls(15, ParametersPocketsBotRight, vec3(1));
+	BallInner* BotRightPockColl = new BallInner(15, ParametersPocketsBotRight, vec3(1));
 	dynObjs.push_back(BotRightPockColl);
 
-	Gravity* gravityBalls = new Gravity(vec2(0, 0));		//Testing purposes
-	PhysicsParameters* ParametersBalls = new PhysicsParameters(10, vec2(250, 800), vec2(100, 100), 0.8f);						//Mass, Pos, vel, restit
-	Balls* ball = new Balls(20, ParametersBalls);
-	forceRegistry->Add(ball, gravityBalls);
+	Drag* DragBlackBall1 = new Drag(5.0f, 0.0f);		
+	PhysicsParameters* ParametersBalls = new PhysicsParameters(10, vec2(500, 750), vec2(0, 0), 0.8f);						//Mass, Pos, vel, restit
+	Balls* BlackBall = new Balls(20, ParametersBalls, vec3(0,0,0));		//Black
+	forceRegistry->Add(BlackBall, DragBlackBall1);
 	//EntityList.push_back(ball);
-	dynObjs.push_back(ball);
+	dynObjs.push_back(BlackBall);
 
-	Gravity* gravityBalls1 = new Gravity(vec2(0, 0));		//Testing purposes
-	PhysicsParameters* ParametersBalls1 = new PhysicsParameters(10, vec2(250, 500), vec2(100, 100), 0.8f);						//Mass, Pos, vel, restit
-	Balls* bal1l = new Balls(20, ParametersBalls1);
-	forceRegistry->Add(bal1l, gravityBalls1);
+	Drag* DragRedBall1 = new Drag(5.0f, 0.0f);
+	PhysicsParameters* ParametersRedball = new PhysicsParameters(10, vec2(520, 713), vec2(0, 0), 0.8f);						//Mass, Pos, vel, restit
+	Balls* Redball = new Balls(20, ParametersRedball, vec3(1, 0, 0));	//Red
+	forceRegistry->Add(Redball, DragRedBall1);
 	//EntityList.push_back(ball);
-	dynObjs.push_back(bal1l);
+	dynObjs.push_back(Redball);
 
-	Gravity* gravityBalls2 = new Gravity(vec2(0, -200));		//Testing purposes
-	PhysicsParameters* ParametersBalls2 = new PhysicsParameters(10, vec2(500, 600), vec2(100, 100), 0.8f);						//Mass, Pos, vel, restit
-	Balls* ball2 = new Balls(20, ParametersBalls2);
-	forceRegistry->Add(ball2, gravityBalls2);
+	Drag* DragYellowBall1 = new Drag(5.0f, 0.0f);
+	PhysicsParameters* ParametersYellowBall1 = new PhysicsParameters(10, vec2(480, 713), vec2(0, 0), 0.8f);						//Mass, Pos, vel, restit
+	Balls* Yellowball = new Balls(20, ParametersYellowBall1, vec3(1, 1, 0));	  //Yellow
+	forceRegistry->Add(Yellowball, DragYellowBall1);
 	//EntityList.push_back(ball);
-	dynObjs.push_back(ball2);
+	dynObjs.push_back(Yellowball);
+
+	Drag* DragRedBall2 = new Drag(5.0f, 0.0f);
+	PhysicsParameters* ParametersRedBall2 = new PhysicsParameters(10, vec2(500, 676), vec2(0, 0), 0.8f);						//Mass, Pos, vel, restit
+	Balls* Redball2 = new Balls(20, ParametersRedBall2, vec3(1, 0, 0));	//Red
+	forceRegistry->Add(Redball2, DragRedBall2);
+	//EntityList.push_back(ball);
+	dynObjs.push_back(Redball2);
+	
+	Drag* DragRedBall3 = new Drag(5.0f, 0.0f);
+	PhysicsParameters* ParametersRedBall3 = new PhysicsParameters(10, vec2(460, 750), vec2(0, 0), 0.8f);						//Mass, Pos, vel, restit
+	Balls* Redball3 = new Balls(20, ParametersRedBall3, vec3(1, 0, 0));	//Red
+	forceRegistry->Add(Redball3, DragRedBall3);
+	//EntityList.push_back(ball);
+	dynObjs.push_back(Redball3);
+
+	Drag* DragYellowBall2 = new Drag(5.0f, 0.0f);
+	PhysicsParameters* ParametersYellowBall2 = new PhysicsParameters(10, vec2(540, 750), vec2(0, 0), 0.8f);						//Mass, Pos, vel, restit
+	Balls* Yellowball2 = new Balls(20, ParametersYellowBall2, vec3(1, 1, 0));	  //Yellow
+	forceRegistry->Add(Yellowball2, DragYellowBall2);
+	//EntityList.push_back(ball);
+	dynObjs.push_back(Yellowball2);
+
+	Drag* DragYellowBall3 = new Drag(5.0f, 0.0f);
+	PhysicsParameters* ParametersYellowBall3 = new PhysicsParameters(10, vec2(440, 787), vec2(0, 0), 0.8f);						//Mass, Pos, vel, restit
+	Balls* Yellowball3 = new Balls(20, ParametersYellowBall3, vec3(1, 1, 0));	  //Yellow
+	forceRegistry->Add(Yellowball3, DragYellowBall3);
+	//EntityList.push_back(ball);
+	dynObjs.push_back(Yellowball3);
+
+	Drag* DragRedBall4 = new Drag(5.0f, 0.0f);
+	PhysicsParameters* ParametersRedBall4 = new PhysicsParameters(10, vec2(481, 787), vec2(0, 0), 0.8f);						//Mass, Pos, vel, restit
+	Balls* Redball4 = new Balls(20, ParametersRedBall4, vec3(1, 0, 0));	//Red
+	forceRegistry->Add(Redball4, DragRedBall4);
+	//EntityList.push_back(ball);
+	dynObjs.push_back(Redball4);
+
+	Drag* DragYellowBall4 = new Drag(5.0f, 0.0f);
+	PhysicsParameters* ParametersYellowBall4 = new PhysicsParameters(10, vec2(522, 787), vec2(0, 0), 0.8f);						//Mass, Pos, vel, restit
+	Balls* Yellowball4 = new Balls(20, ParametersYellowBall4, vec3(1, 1, 0));	  //Yellow
+	forceRegistry->Add(Yellowball4, DragYellowBall4);
+	//EntityList.push_back(ball);
+	dynObjs.push_back(Yellowball4);
+
+	Drag* DragRedBall5 = new Drag(5.0f, 0.0f);
+	PhysicsParameters* ParametersRedBall5 = new PhysicsParameters(10, vec2(563, 787), vec2(0, 0), 0.8f);						//Mass, Pos, vel, restit
+	Balls* Redball5 = new Balls(20, ParametersRedBall5, vec3(1, 0, 0));	//Red
+	forceRegistry->Add(Redball5, DragRedBall5);
+	//EntityList.push_back(ball);
+	dynObjs.push_back(Redball5);
+
+	Drag* DragYellowBall5 = new Drag(5.0f, 0.0f);
+	PhysicsParameters* ParametersYellowBall5 = new PhysicsParameters(10, vec2(587, 823), vec2(0, 0), 0.8f);						//Mass, Pos, vel, restit
+	Balls* Yellowball5 = new Balls(20, ParametersYellowBall5, vec3(1, 1, 0));	  //Yellow
+	forceRegistry->Add(Yellowball5, DragYellowBall5);
+	//EntityList.push_back(ball);
+	dynObjs.push_back(Yellowball5);
+
+	Drag* DragRedBall6 = new Drag(5.0f, 0.0f);
+	PhysicsParameters* ParametersRedBall6 = new PhysicsParameters(10, vec2(547, 823), vec2(0, 0), 0.8f);						//Mass, Pos, vel, restit
+	Balls* Redball6 = new Balls(20, ParametersRedBall6, vec3(1, 0, 0));	//Red
+	forceRegistry->Add(Redball6, DragRedBall6);
+	//EntityList.push_back(ball);
+	dynObjs.push_back(Redball6);
+
+	Drag* DragYellowBall6 = new Drag(5.0f, 0.0f);
+	PhysicsParameters* ParametersYellowBall6 = new PhysicsParameters(10, vec2(507, 823), vec2(0, 0), 0.8f);						//Mass, Pos, vel, restit
+	Balls* Yellowball6 = new Balls(20, ParametersYellowBall6, vec3(1, 1, 0));	  //Yellow
+	forceRegistry->Add(Yellowball6, DragYellowBall6);
+	//EntityList.push_back(ball);
+	dynObjs.push_back(Yellowball6);
+
+	
+	Drag* DragRedBall7 = new Drag(5.0f, 0.0f);
+	PhysicsParameters* ParametersRedBall7 = new PhysicsParameters(10, vec2(467, 823), vec2(0, 0), 0.8f);						//Mass, Pos, vel, restit
+	Balls* Redball7 = new Balls(20, ParametersRedBall7, vec3(1, 0, 0));	//Red
+	forceRegistry->Add(Redball7, DragRedBall7);
+	//EntityList.push_back(ball);
+	dynObjs.push_back(Redball7);
+
+	Drag* DragYellowBall7 = new Drag(5.0f, 0.0f);
+	PhysicsParameters* ParametersYellowBall7 = new PhysicsParameters(10, vec2(427, 823), vec2(0, 0), 0.8f);						//Mass, Pos, vel, restit
+	Balls* Yellowball7 = new Balls(20, ParametersYellowBall7, vec3(1, 1, 0));	  //Yellow
+	forceRegistry->Add(Yellowball7, DragYellowBall7);
+	//EntityList.push_back(ball);
+	dynObjs.push_back(Yellowball7);
+
+	Drag* DragCueBall = new Drag(10.0f, 0.0f);
+	PhysicsParameters* ParametersCueBall = new PhysicsParameters(10, vec2(500, 250), vec2(0, 600), 0.8f);						//Mass, Pos, vel, restit
+	Balls* CueBall = new Balls(25, ParametersCueBall, vec3(1, 1, 1));	  //White
+	forceRegistry->Add(CueBall, DragCueBall);
+	//EntityList.push_back(ball);
+	dynObjs.push_back(CueBall);
+
+	Gravity* gravityDecor = new Gravity(vec2(0, -50));		
+	PhysicsParameters* ParametersDecor = new PhysicsParameters(20, vec2(45, 1000), vec2(0, 0), 0.8f);						//Mass, Pos, vel, restit
+	Balls* Decor = new Balls(20, ParametersDecor, vec3(1, 0, 0));
+	forceRegistry->Add(Decor, gravityDecor);
+	dynObjs.push_back(Decor);
+
+	Gravity* gravityDecor1 = new Gravity(vec2(0, -100));		
+	PhysicsParameters* ParametersDecor1 = new PhysicsParameters(20, vec2(45, 1000), vec2(0, 0), 0.8f);						//Mass, Pos, vel, restit
+	Balls* Decor1 = new Balls(20, ParametersDecor1, vec3(1, 1, 0));
+	forceRegistry->Add(Decor1, gravityDecor1);
+	dynObjs.push_back(Decor1);
+
+
+	Gravity* gravityDecor2 = new Gravity(vec2(0, -150));		//Testing purposes
+	PhysicsParameters* ParametersDecor2 = new PhysicsParameters(20, vec2(45, 1000), vec2(0, 0), 0.8f);						//Mass, Pos, vel, restit
+	Balls* Decor2 = new Balls(20, ParametersDecor2, vec3(1, 0, 0));
+	forceRegistry->Add(Decor2, gravityDecor2);
+	dynObjs.push_back(Decor2);
+
+	Gravity* gravityDecor3 = new Gravity(vec2(0, -50));		//Testing purposes
+	PhysicsParameters* ParametersDecor3 = new PhysicsParameters(20, vec2(955, 1000), vec2(0, 0), 0.8f);						//Mass, Pos, vel, restit
+	Balls* Decor3 = new Balls(20, ParametersDecor3, vec3(1, 0, 0));
+	forceRegistry->Add(Decor3, gravityDecor3);
+	dynObjs.push_back(Decor3);
+
+	Gravity* gravityDecor4 = new Gravity(vec2(0, -100));		//Testing purposes
+	PhysicsParameters* ParametersDecor4 = new PhysicsParameters(20, vec2(955, 1000), vec2(0, 0), 0.8f);						//Mass, Pos, vel, restit
+	Balls* Decor4 = new Balls(20, ParametersDecor4, vec3(1, 1, 0));
+	forceRegistry->Add(Decor4, gravityDecor4);
+	dynObjs.push_back(Decor4);
+
+	Gravity* gravityDecor5 = new Gravity(vec2(0, -150));		//Testing purposes
+	PhysicsParameters* ParametersDecor5 = new PhysicsParameters(20, vec2(955, 1000), vec2(0, 0), 0.8f);						//Mass, Pos, vel, restit
+	Balls* Decor5 = new Balls(20, ParametersDecor5, vec3(1, 0, 0));
+	forceRegistry->Add(Decor5, gravityDecor5);
+	dynObjs.push_back(Decor5);
+
 }
+
+//Gravity* gravityBalls1 = new Gravity(vec2(0, 0));		//Testing purposes
+//PhysicsParameters* ParametersBalls1 = new PhysicsParameters(10, vec2(250, 500), vec2(100, 100), 0.8f);						//Mass, Pos, vel, restit
+//Balls* bal1l = new Balls(20, ParametersBalls1);
+//forceRegistry->Add(bal1l, gravityBalls1);
+////EntityList.push_back(ball);
+//dynObjs.push_back(bal1l);
 
 void Game::Render()
 {

@@ -120,8 +120,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AABB.cpp" />
+    <ClCompile Include="BallInner.cpp" />
     <ClCompile Include="Balls.cpp" />
     <ClCompile Include="BoundingSphere.cpp" />
+    <ClCompile Include="BoundingSpherePocket.cpp" />
     <ClCompile Include="CollisionDetector.cpp" />
     <ClCompile Include="Contact.cpp" />
     <ClCompile Include="ContactResolver.cpp" />
@@ -147,8 +149,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AABB.h" />
+    <ClInclude Include="BallInner.h" />
     <ClInclude Include="Balls.h" />
     <ClInclude Include="BoundingSphere.h" />
+    <ClInclude Include="BoundingSpherePocket.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionData.h" />
     <ClInclude Include="CollisionDetector.h" />

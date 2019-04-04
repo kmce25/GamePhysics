@@ -8,6 +8,7 @@ struct CollisionData
 
 	virtual ~CollisionData() 
 	{
-		if(contact != nullptr) delete[] contact;
+		if(contact != nullptr) 
+			delete[] contact;
  	}
 };
