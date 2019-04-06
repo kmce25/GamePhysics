@@ -52,5 +52,5 @@ public:
 	void Inputs();
 	void update(float dt);
 	void ReshapeWindow(int SWidth, int SHeight);
-	
+	void CueBallUpdate(PhysicsParameters* ball);
 };

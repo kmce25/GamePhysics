@@ -13,6 +13,8 @@
 using namespace std;
 using namespace glm;	
 
+//PhysicsParameters* ParametersCueBall;
+
 void Game::Load()
 {
 	Window = new GameWindow(ScreenWidth, ScreenHeight, 500, 10);
@@ -129,9 +131,9 @@ void Game::Load()
 	BallInner* BotRightPockColl = new BallInner(15, ParametersPocketsBotRight, vec3(1));
 	dynObjs.push_back(BotRightPockColl);
 
-	Drag* DragBlackBall1 = new Drag(5.0f, 0.0f);		
+	Drag* DragBlackBall1 = new Drag(5.0f, 0.0f);
 	PhysicsParameters* ParametersBalls = new PhysicsParameters(10, vec2(500, 750), vec2(0, 0), 0.8f);						//Mass, Pos, vel, restit
-	Balls* BlackBall = new Balls(20, ParametersBalls, vec3(0,0,0));		//Black
+	Balls* BlackBall = new Balls(20, ParametersBalls, vec3(0, 0, 0));		//Black
 	forceRegistry->Add(BlackBall, DragBlackBall1);
 	//EntityList.push_back(ball);
 	dynObjs.push_back(BlackBall);
@@ -156,7 +158,7 @@ void Game::Load()
 	forceRegistry->Add(Redball2, DragRedBall2);
 	//EntityList.push_back(ball);
 	dynObjs.push_back(Redball2);
-	
+
 	Drag* DragRedBall3 = new Drag(5.0f, 0.0f);
 	PhysicsParameters* ParametersRedBall3 = new PhysicsParameters(10, vec2(460, 750), vec2(0, 0), 0.8f);						//Mass, Pos, vel, restit
 	Balls* Redball3 = new Balls(20, ParametersRedBall3, vec3(1, 0, 0));	//Red
@@ -220,7 +222,7 @@ void Game::Load()
 	//EntityList.push_back(ball);
 	dynObjs.push_back(Yellowball6);
 
-	
+
 	Drag* DragRedBall7 = new Drag(5.0f, 0.0f);
 	PhysicsParameters* ParametersRedBall7 = new PhysicsParameters(10, vec2(467, 823), vec2(0, 0), 0.8f);						//Mass, Pos, vel, restit
 	Balls* Redball7 = new Balls(20, ParametersRedBall7, vec3(1, 0, 0));	//Red
@@ -234,26 +236,25 @@ void Game::Load()
 	forceRegistry->Add(Yellowball7, DragYellowBall7);
 	//EntityList.push_back(ball);
 	dynObjs.push_back(Yellowball7);
-
+	////////////////////////////////////////////////////////////////////////////////////////////////////Decor balls
 	Drag* DragCueBall = new Drag(10.0f, 0.0f);
-	PhysicsParameters* ParametersCueBall = new PhysicsParameters(10, vec2(500, 250), vec2(0, 600), 0.8f);						//Mass, Pos, vel, restit
+	PhysicsParameters* ParametersCueBall = new PhysicsParameters(10, vec2(500, 250), vec2(0, 1000), 0.8f);						//Mass, Pos, vel, restit
 	Balls* CueBall = new Balls(25, ParametersCueBall, vec3(1, 1, 1));	  //White
 	forceRegistry->Add(CueBall, DragCueBall);
-	//EntityList.push_back(ball);
 	dynObjs.push_back(CueBall);
 
-	Gravity* gravityDecor = new Gravity(vec2(0, -50));		
+	////////////////////////////////////////////////////////////////////////////////////////////////////Decor balls
+	Gravity* gravityDecor = new Gravity(vec2(0, -50));
 	PhysicsParameters* ParametersDecor = new PhysicsParameters(20, vec2(45, 1000), vec2(0, 0), 0.8f);						//Mass, Pos, vel, restit
 	Balls* Decor = new Balls(20, ParametersDecor, vec3(1, 0, 0));
 	forceRegistry->Add(Decor, gravityDecor);
 	dynObjs.push_back(Decor);
 
-	Gravity* gravityDecor1 = new Gravity(vec2(0, -100));		
+	Gravity* gravityDecor1 = new Gravity(vec2(0, -100));
 	PhysicsParameters* ParametersDecor1 = new PhysicsParameters(20, vec2(45, 1000), vec2(0, 0), 0.8f);						//Mass, Pos, vel, restit
 	Balls* Decor1 = new Balls(20, ParametersDecor1, vec3(1, 1, 0));
 	forceRegistry->Add(Decor1, gravityDecor1);
 	dynObjs.push_back(Decor1);
-
 
 	Gravity* gravityDecor2 = new Gravity(vec2(0, -150));		//Testing purposes
 	PhysicsParameters* ParametersDecor2 = new PhysicsParameters(20, vec2(45, 1000), vec2(0, 0), 0.8f);						//Mass, Pos, vel, restit
@@ -278,15 +279,8 @@ void Game::Load()
 	Balls* Decor5 = new Balls(20, ParametersDecor5, vec3(1, 0, 0));
 	forceRegistry->Add(Decor5, gravityDecor5);
 	dynObjs.push_back(Decor5);
-
 }
 
-//Gravity* gravityBalls1 = new Gravity(vec2(0, 0));		//Testing purposes
-//PhysicsParameters* ParametersBalls1 = new PhysicsParameters(10, vec2(250, 500), vec2(100, 100), 0.8f);						//Mass, Pos, vel, restit
-//Balls* bal1l = new Balls(20, ParametersBalls1);
-//forceRegistry->Add(bal1l, gravityBalls1);
-////EntityList.push_back(ball);
-//dynObjs.push_back(bal1l);
 
 void Game::Render()
 {
