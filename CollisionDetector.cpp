@@ -166,20 +166,42 @@ bool CollisionDetector::AABBAABBCollision(PhysicsEntity * obj1, PhysicsEntity * 
 	return collision;
 }
 
-bool CollisionDetector::SpherePocketCollision(PhysicsEntity * obj1, PhysicsEntity * obj2, CollisionData** data) 
+bool CollisionDetector::SpherePocketCollision(PhysicsEntity * obj1, PhysicsEntity * obj2, CollisionData** data)
 {
-	BoundingSphere* s1 = dynamic_cast<BoundingSphere*>(obj1->getCollider());
-	BoundingSpherePocket* s2 = dynamic_cast<BoundingSpherePocket*>(obj2->getCollider());
-	if (s2 != nullptr)
-	{
-	float dist = Utils::distanceBetweenPoints(s1->getCenter(), s2->getCenter());
-	float penetration = dist - (s1->getRadii() + s2->getRadii());
-	bool collision = penetration <= 0;
-	if (collision)
-	{
-		delete obj1;
-	}
+BoundingSpherePocket* bs1 = dynamic_cast<BoundingSpherePocket*>(obj1->getCollider());								
+BoundingSphere* bs2 = dynamic_cast<BoundingSphere*>(obj2->getCollider());
+	/*if (bs1 != nullptr)
+	{*/
 
-	return collision;
-	}
+		float dist = Utils::distanceBetweenPoints(bs1->getCenter(), bs2->getCenter());	//bs2 returning as a nullptr, the information does not seem to be getting passed to it, center etc. 
+		float penetration = dist - (bs1->getRadii() + bs2->getRadii());
+		bool collision = penetration <= 0;
+		if (collision)
+		{
+			delete obj1;
+		}
+
+		return collision;
+	/*}*/
 }
+
+
+///DOES NOT RETURN NULLPTR BUT THROUGHS READING VIOLAITON
+//BoundingSpherePocket* bs1 = dynamic_cast<BoundingSpherePocket*>(obj1->getCollider());								
+//BoundingSphere* bs2 = dynamic_cast<BoundingSphere*>(obj2->getCollider());
+
+
+///RETURNS NULLPTR BUT DOES NOT THROUGH READING VIOLATION
+//BoundingSphere* bs1 = dynamic_cast<BoundingSphere*>(obj1->getCollider());								
+//BoundingSpherePocket* bs2 = dynamic_cast<BoundingSpherePocket*>(obj2->getCollider());
+
+///
+//BoundingSphere* bs1;
+//BoundingSpherePocket* bs2 = dynamic_cast<BoundingSpherePocket*>(obj1->getCollider());
+//if (bs2 != nullptr)
+//bs1 = dynamic_cast<BoundingSphere*>(obj2->getCollider());
+//else
+//{
+//	bs1 = dynamic_cast<BoundingSphere*>(obj1->getCollider());
+//	bs2 = dynamic_cast<BoundingSpherePocket*>(obj2->getCollider());
+//}

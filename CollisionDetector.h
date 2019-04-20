@@ -21,7 +21,6 @@ public:
 	static	CollisionData* CheckCollision(PhysicsEntity* obj1, PhysicsEntity* obj2);
 private:
 	static bool SphereSphereCollision(PhysicsEntity* obj1, PhysicsEntity* obj2, CollisionData** data);
-
 	static bool SphereAABBCollision(PhysicsEntity* obj1,  PhysicsEntity* obj2, CollisionData** data);
 	static bool AABBAABBCollision(PhysicsEntity* obj1,  PhysicsEntity* obj2, CollisionData** data);
 	static bool SpherePocketCollision(PhysicsEntity* obj1, PhysicsEntity* obj2, CollisionData** data);

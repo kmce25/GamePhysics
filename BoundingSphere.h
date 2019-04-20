@@ -1,4 +1,3 @@
-// (c) Marco Gilardi, 2017
 #pragma once
 #include "Collider.h"
 #include "glm\glm.hpp"
